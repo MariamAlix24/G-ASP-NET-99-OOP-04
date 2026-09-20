@@ -18,6 +18,53 @@
                 Interfaces: Yes, a class can implement multiple interfaces simultaneously.*/
             #endregion
             #endregion
+            #region Part 02 — Practical
+            DeliveryAddress address = new DeliveryAddress("Cairo", "Egypt", 2);
+            //a)Create one StandardShipment
+            StandardShipment standard = new StandardShipment("SH001", "Laptop", 10m, 45m, address);
+            //b)Create one ExpressShipment
+            ExpressShipment express = new ExpressShipment("SH002", "Documents", 4m, 50m, address, 30m);
+            //c)Create one InternationalShipment
+            InternationalShipment international = new InternationalShipment("SH003", "Medical Equipment", 10m, 160m, address, "Germany", 50m);
+            //d)add all shipments to the Delivery Center
+            DeliveryCenter center = new DeliveryCenter("Main Delivery Center");
+            center.AddShipment(standard);
+            center.AddShipment(express);
+            center.AddShipment(international);
+            //e)Print all shipment details
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Delivery Center");
+            Console.WriteLine("==========================================");
+            //Standard
+            Console.WriteLine("\nStandard Shipment\n");
+            standard.PrintShipment();
+            Console.WriteLine("\n------------------------------------------");
+            //Express
+            Console.WriteLine("\nExpress Shipment\n");
+            express.PrintShipment();
+            Console.WriteLine("\n------------------------------------------");
+            //International
+            Console.WriteLine("\nInternational Shipment\n");
+            international.PrintShipment();
+            //f & h ITrackable[] array
+            Console.WriteLine("\n==========================================");
+            Console.WriteLine("Tracking Status\n");
+            ITrackable[] trackables = new ITrackable[] { standard, express, international };
+            foreach (ITrackable t in trackables)
+            {
+                Console.WriteLine(t.GetTrackingStatus());
+                Console.WriteLine();
+            }
+            //g & i IInsurable[] array
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Insurance\n");
+            IInsurable[] insurables = new IInsurable[] { standard, express, international };
+            Console.WriteLine($"Standard Shipment Insurance : {insurables[0].CalculateInsurance():0.00} EGP\n");
+            Console.WriteLine($"Express Shipment Insurance : {insurables[1].CalculateInsurance():0.00} EGP\n");
+            Console.WriteLine($"International Shipment Insurance : {insurables[2].CalculateInsurance():0.00} EGP\n");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Interface Polymorphism Demonstrated Successfully.");
+            #endregion
         }
     }
 }
